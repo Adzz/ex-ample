@@ -1,0 +1,52 @@
+html {
+  /*Change dis*/
+  font-family: "Monaco";
+}
+
+.explanation {
+  margin-right: 15px;
+  margin-left: 30px;
+  /*max-width: 40vw;*/
+}
+
+.code-example {
+  margin-right: 30px;
+  margin-left: 15px;
+}
+
+.page-wrapper {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  flex-wrap: wrap;
+}
+
+.highlight {
+  padding: 30px;
+  font-size: 24px;
+}
+
+@media screen and (min-width: 950px) {
+  .explanation {
+    max-width: 40vw;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .page-wrapper {
+    flex-direction: column;
+  }
+  .explanation {
+    margin: 0px;
+    width: 100%;
+  }
+  .code-example {
+    width: 100%;
+    margin: 0px;
+  }
+}
+
+
+/*media query to get the code to wrap under the explanation on tablet and under */
