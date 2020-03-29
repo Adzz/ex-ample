@@ -7,7 +7,7 @@ A repo with a collection of elixir code examples for quick reference. Powers [ww
 To add an example clone the repo then choose a snake cased name for your example. This will appear in the contents so short names are good.
 
 Start by running the generator for new examples:
-```
+```sh
 $ mix new_example my_awesome_example
 ```
 
@@ -20,4 +20,10 @@ another_similar_example
 my_awesome_example
 more_examples
 ```
-Then submit the PR :tada:
+
+Once that's done build the site with:
+```sh
+$ mix build_site
+```
+
+Then submit the PR! :tada:
