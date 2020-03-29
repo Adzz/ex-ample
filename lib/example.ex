@@ -10,14 +10,12 @@ defmodule Example do
   alias Makeup.Styles.HTML.StyleMap
 
   @templates_dir "lib/templates/"
-  @output_dir "lib/output/"
+  @output_dir "docs/"
   @code_examples_dir "lib/code_examples/"
   @explanations_dir "lib/explanations/"
   @temp_dir "tmp/"
   @doc """
-  Regenerates everything from scratch
-
-  We should only do that after everything else works.
+  Regenerates everything from scratch.
   """
   def build_all do
     # Just in case...
