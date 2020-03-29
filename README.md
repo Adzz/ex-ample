@@ -1,31 +1,23 @@
 # Example
 
-Run the mix task. Add to examples_order. Re-arrange if desired.
+A repo with a collection of elixir code examples for quick reference. Powers [www.ex-ample.co.uk]()
 
-TODO:
+### Contributing
 
-1. Mix task check file doesn't exist already
-2. Add contents to home page.
-3. Add next and previous to each example - take account of the ends... Sounds tricky
-4. Add title on each page and footer.
-5. Test?
-6. Deploy
-7. Custom domain name.
+To add an example clone the repo then choose a snake cased name for your example. This will appear in the contents so short names are good.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `example` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:example, "~> 0.1.0"}
-  ]
-end
+Start by running the generator for new examples:
+```
+$ mix new_example my_awesome_example
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/example](https://hexdocs.pm/example).
+This creates two files, an `.ex` file in code_examples and a `.html` file in explanations. Put the code example in the `.ex` file and write an explanation of it in the explanations file. Once you are happy, add your new example to `examples_order.txt`. The order of this determines the order of the examples, so if it's similar to an existing one, it might be a good idea to group it together with that.
+E.g.
 
+```
+hello_world
+another_similar_example
+my_awesome_example
+more_examples
+```
+Then submit the PR :tada:

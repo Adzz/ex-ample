@@ -64,7 +64,6 @@ defmodule Example do
       {:middle, [prev, current, next]} -> build_example(current, previous: prev, next: next)
     end)
 
-
     # If everything above worked out okay then let's move everything over from tmp
     File.rm_rf!(Path.expand(@output_dir))
     File.mkdir!(@output_dir)
@@ -165,7 +164,7 @@ defmodule Example do
     end)
   end
 
-  defp drop_extension(name, extension) do
+  def drop_extension(name, extension) do
     [file, _extension] = String.split(name, extension)
     file
   end
@@ -202,6 +201,7 @@ defmodule Example do
       </div>
     </section>
     <section class="footer-btns">
+      <a href="#" style="visibility: hidden" class="prev">Previous</a>
       <a href="./#{next_link}.html" class="next">Next</a>
     </section>
     <script>

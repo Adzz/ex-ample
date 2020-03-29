@@ -77,7 +77,7 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 70vh;
+  margin-bottom: 50px;
   flex-wrap: wrap;
 }
 
@@ -86,25 +86,18 @@ button:active {
   font-size: 18px;
 }
 
+.footer-btns {
+  display: flex;
+  max-width: 528px;
+  align-content: space-between;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
 @media screen and (min-width: 950px) {
   .explanation {
     max-width: 40vw;
   }
 }
-
-@media screen and (max-width: 950px) {
-  .page-wrapper {
-    flex-direction: column;
-  }
-  .explanation {
-    margin: 0px;
-    width: 100%;
-  }
-  .code-example {
-    width: 100%;
-    margin: 0px;
-  }
-}
-
 
 /*media query to get the code to wrap under the explanation on tablet and under */
