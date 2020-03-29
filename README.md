@@ -1,6 +1,6 @@
 # Example
 
-A repo with a collection of elixir code examples for quick reference. Powers [www.ex-ample.co.uk]()
+A repo with a collection of elixir code examples for quick reference. Powers [www.ex-ample.co.uk](www.ex-ample.co.uk)
 
 ### Contributing
 
