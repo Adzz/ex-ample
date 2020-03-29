@@ -1,32 +1,89 @@
 html {
-  /*Change dis*/
+  /* Change dis ?*/
   font-family: "Monaco";
+}
+
+body {
+  padding: 30px;
+}
+
+.example-heading {
+  margin-bottom: 30px;
+}
+
+.home-spiel {
+  max-width: 40vw;
+  margin: 0 auto 40px auto;
+}
+
+.contents {
+  max-width: 40vw;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #9A54B1;
+}
+
+button {
+  /*display: inline-block;*/
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  background: #9A54B1;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:active {
+  background: #CE3DFE;
+}
+
+button:active {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+  transform: scale(0.99);
+}
+
+.copy-btn {
+  position: relative;
+  top: 30px;
+  display: block;
+  margin: 0 auto 25px auto;
+  padding: 5px 7px;
 }
 
 .explanation {
   margin-right: 15px;
   margin-left: 30px;
-  /*max-width: 40vw;*/
 }
 
 .code-example {
   margin-right: 30px;
   margin-left: 15px;
+  background-color: #f8f8f8;
 }
 
 .page-wrapper {
-  padding: 30px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 70vh;
   flex-wrap: wrap;
 }
 
-
 .highlight {
   padding: 30px;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 @media screen and (min-width: 950px) {

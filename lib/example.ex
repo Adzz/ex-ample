@@ -27,6 +27,7 @@ defmodule Example do
     generate_index()
     generate_styles()
 
+    # Check each example has an explanation:
     explanations =
       File.ls!(Path.expand(@explanations_dir))
       |> Enum.map(fn explanation -> drop_extension(explanation, ".html") end)
@@ -36,35 +37,54 @@ defmodule Example do
       |> Enum.map(fn example -> drop_extension(example, ".ex") end)
 
     # Perf is bad here but whatever until it matters aye!
-    Enum.map(examples, fn example ->
-      explanation =
-        Enum.find(explanations, fn explanation ->
-          example == explanation
-        end)
-
-      {explanation, example}
+    examples
+    |> Enum.map(fn example ->
+      with explanation when not is_nil(explanation) <-
+             Enum.find(explanations, fn explanation -> example == explanation end) do
+        explanation
+      else
+        nil ->
+          raise "You need example code in code_examples and an " <>
+                  "explanation in explanations and they need to be named the same"
+      end
     end)
-    |> Enum.each(&build_example/1)
+
+    File.read!(Path.expand("lib/examples_order.txt"))
+    |> String.split("\n")
+    |> Enum.filter(fn
+      "" -> false
+      _ -> true
+    end)
+    |> next_previous_links()
+    |> Enum.map(fn
+      # This is when there is only one example
+      {:first, [current]} -> build_example(current, [])
+      {:first, [current, next]} -> build_example(current, next: next)
+      {:last, [previous, current]} -> build_example(current, previous: previous)
+      {:middle, [prev, current, next]} -> build_example(current, previous: prev, next: next)
+    end)
+
 
     # If everything above worked out okay then let's move everything over from tmp
     File.rm_rf!(Path.expand(@output_dir))
     File.mkdir!(@output_dir)
     File.cp_r!(@temp_dir, @output_dir)
-    "SUCESS!"|> IO.inspect()
+    File.rm_rf!(Path.expand(@temp_dir))
+    IO.inspect("SUCESS!")
   end
 
-  def build_example({explanation, example}) do
-    File.touch!(@output_dir <> "#{example}.html")
+  defp build_example(file_name, next_prev_links) do
+    File.touch!(@output_dir <> "#{file_name}.html")
 
     code_string =
-      File.read!(Path.expand(@code_examples_dir <> "#{example}.ex"))
+      File.read!(Path.expand(@code_examples_dir <> "#{file_name}.ex"))
       |> Code.format_string!()
       |> Enum.join()
 
-    explanation = File.read!(Path.expand(@explanations_dir <> "#{explanation}.html"))
-
+    explanation = File.read!(Path.expand(@explanations_dir <> "#{file_name}.html"))
     code_html = Makeup.highlight(code_string)
-    data = code_example_template(explanation, code_html, code_string)
+
+    data = code_example_template(explanation, code_html, code_string, next_prev_links)
 
     generate(%{
       sources: [
@@ -72,7 +92,7 @@ defmodule Example do
         data: data,
         file: "footer.html"
       ],
-      destination: "#{example}.html"
+      destination: "#{file_name}.html"
     })
   end
 
@@ -90,10 +110,26 @@ defmodule Example do
       sources: [
         file: "head.html",
         file: "index.html",
+        data: generate_examples_contents_page(),
+        data: "</ul>",
         file: "footer.html"
       ],
       destination: "index.html"
     })
+  end
+
+  defp generate_examples_contents_page() do
+    File.read!(Path.expand("lib/examples_order.txt"))
+    |> String.split("\n")
+    |> Enum.filter(fn
+      "" -> false
+      _ -> true
+    end)
+    |> Enum.map(fn example ->
+      """
+      <li><a href="./#{example}.html">#{String.replace(example, "_", " ")}</a></li>
+      """
+    end)
   end
 
   defp generate(%{destination: destination, sources: sources}) do
@@ -109,23 +145,112 @@ defmodule Example do
     end)
   end
 
+  def next_previous_links(enum) do
+    last_index = length(enum) - 1
+
+    Enum.with_index(enum)
+    |> Enum.reduce([], fn {x, index}, acc ->
+      case index do
+        0 ->
+          # first first and index + 1
+          acc ++ [first: Enum.take(enum, 2)]
+
+        ^last_index ->
+          # last - get last and index - 1
+          acc ++ [last: [Enum.at(enum, -2), Enum.at(enum, -1)]]
+
+        index ->
+          acc ++ [middle: [Enum.at(enum, index - 1), x, Enum.at(enum, index + 1)]]
+      end
+    end)
+  end
+
   defp drop_extension(name, extension) do
     [file, _extension] = String.split(name, extension)
     file
   end
 
-  defp code_example_template(code_explanation, code_html, code_string) do
+  defp code_example_template(code_explanation, code_html, code_string, []) do
     """
     <section class="page-wrapper">
       <div class="explanation">
+        <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
         #{code_explanation}
       </div>
       <div class="code-example" id="code-example">
-        <div class="right-column">
-        <button class="copy">Copy to clipboard</button>
+        <button class="copy-btn" role="button">Copy to clipboard</button>
         #{code_html}
-        </div>
       </div>
+    </section>
+    <script>
+    // Used for the copy to clipboard button.
+    var code = `#{code_string}`
+    </script>
+    """
+  end
+
+  defp code_example_template(code_explanation, code_html, code_string, next: next_link) do
+    """
+    <section class="page-wrapper">
+      <div class="explanation">
+        <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
+        #{code_explanation}
+      </div>
+      <div class="code-example" id="code-example">
+        <button class="copy-btn" role="button">Copy to clipboard</button>
+        #{code_html}
+      </div>
+    </section>
+    <section class="footer-btns">
+      <a href="./#{next_link}.html" class="next">Next</a>
+    </section>
+    <script>
+    // Used for the copy to clipboard button.
+    var code = `#{code_string}`
+    </script>
+    """
+  end
+
+  defp code_example_template(code_explanation, code_html, code_string, previous: previous_link) do
+    """
+    <section class="page-wrapper">
+      <div class="explanation">
+        <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
+        #{code_explanation}
+      </div>
+      <div class="code-example" id="code-example">
+        <button class="copy-btn" role="button">Copy to clipboard</button>
+        #{code_html}
+      </div>
+    </section>
+    <section class="footer-btns">
+      <a href="./#{previous_link}.html" class="prev">Previous</a>
+    </section>
+    <script>
+    // Used for the copy to clipboard button.
+    var code = `#{code_string}`
+    </script>
+    """
+  end
+
+  defp code_example_template(code_explanation, code_html, code_string,
+         previous: previous_link,
+         next: next_link
+       ) do
+    """
+    <section class="page-wrapper">
+      <div class="explanation">
+        <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
+        #{code_explanation}
+      </div>
+      <div class="code-example" id="code-example">
+        <button class="copy-btn" role="button">Copy to clipboard</button>
+        #{code_html}
+      </div>
+    </section>
+    <section class="footer-btns">
+      <a href="./#{previous_link}.html" class="prev">Previous</a>
+      <a href="./#{next_link}.html" class="next">Next</a>
     </section>
     <script>
     // Used for the copy to clipboard button.

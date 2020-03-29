@@ -16,9 +16,8 @@ defmodule Mix.Tasks.NewExample do
   def run([example_name]) do
     if Regex.match?(~r/^[a-z]+(?:_[a-z]+)*$/, example_name) do
       # Check file doesn't already exist.
-
-      File.touch!(Path.expand("lib/examples/#{example_name}.ex"))
-      File.touch!(Path.expand("lib/examples/explanation_#{example_name}.html"))
+      File.touch!(Path.expand("lib/code_examples/#{example_name}.ex"))
+      File.touch!(Path.expand("lib/explanations/#{example_name}.html"))
     else
       raise "Example names must be snake_case"
     end
