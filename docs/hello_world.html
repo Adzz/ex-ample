@@ -9,26 +9,25 @@
 <section class="page-wrapper">
   <div class="explanation">
     <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
-    <p>
-  This is the basic thing that every code introduction seems to want to do even though it's not useful at all.
-</p>
-<p>
-  Let's <em>not</em> do hello world.
-</p>
+    <p>You can run this program by creating a file called hello.ex and pasting the code into it</p>
+<p>To run head to the shell and type <pre>elixir hello.ex</pre></p>
 
   </div>
   <div class="code-example" id="code-example">
     <button class="copy-btn" role="button">Copy to clipboard</button>
-    <pre class="highlight"><code><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Hello</span><span class="w"> </span><span class="k" data-group-id="8231954189-1">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">world</span><span class="p" data-group-id="8231954189-2">(</span><span class="p" data-group-id="8231954189-2">)</span><span class="w"> </span><span class="k" data-group-id="8231954189-3">do</span><span class="w">
+    <pre class="highlight"><code><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Hello</span><span class="w"> </span><span class="k" data-group-id="1179572256-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">world</span><span class="p" data-group-id="1179572256-2">(</span><span class="p" data-group-id="1179572256-2">)</span><span class="w"> </span><span class="k" data-group-id="1179572256-3">do</span><span class="w">
     </span><span class="s">&quot;Hello World&quot;</span><span class="w">
-  </span><span class="k" data-group-id="8231954189-3">end</span><span class="w">
-</span><span class="k" data-group-id="8231954189-1">end</span></code></pre>
+  </span><span class="k" data-group-id="1179572256-3">end</span><span class="w">
+</span><span class="k" data-group-id="1179572256-1">end</span><span class="w">
+
+</span><span class="c1"># Call it like this:</span><span class="w">
+</span><span class="nc">Hello</span><span class="o">.</span><span class="n">world</span><span class="p" data-group-id="1179572256-4">(</span><span class="p" data-group-id="1179572256-4">)</span></code></pre>
   </div>
 </section>
 <section class="footer-btns">
   <a href="#" style="visibility: hidden" class="prev">Previous</a>
-  <a href="./modules.html" class="next">Next</a>
+  <a href="./shebang.html" class="next">Next</a>
 </section>
 <script>
 // Used for the copy to clipboard button.
@@ -36,7 +35,10 @@ var code = `defmodule Hello do
   def world() do
     "Hello World"
   end
-end`
+end
+
+# Call it like this:
+Hello.world()`
 </script>
 
 <script>

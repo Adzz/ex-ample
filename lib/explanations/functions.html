@@ -1,1 +1,5 @@
+<p>Functions in elixir are uniquely identified by their name AND the number of arguments that a function has. So two functions with the same name are different if they have a different number of arguments.</p>
+<p>There are two kinds of functions in Elixir, those found in modules and lambdas.</p>
 <p>Lambdas are free floating functions, they are called with a dot. They are not namespaced under a module and can float around anywhere</p>
+<p>A good use case for lambdas is higher order functions like Enum.map</p>
+<p>To pass functions that are not lambdas around in Elixir we have to use the capture operator: &. The syntax is &Module.function_name/arity</p>
