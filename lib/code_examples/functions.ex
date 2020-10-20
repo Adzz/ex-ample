@@ -11,3 +11,20 @@ defmodule Letter do
 end
 
 Enum.map(["a", "b"], &Letter.upcase/1)
+# Or an alternative syntax:
+Enum.map(["a", "b"], &Letter.upcase(&1))
+# &1 refers to the first argument passed to
+# Letter.upcase. If there are more arguments
+# you can refer to them like so
+
+defmodule Letter do
+  def join_upcase(letter, next_letter) do
+    String.upcase(letter <> next_letter)
+  end
+end
+
+Enum.zip_with(
+  ["a", "b"],
+  ["c", "d"],
+  &Letter.join_upcase(&1, &2)
+)

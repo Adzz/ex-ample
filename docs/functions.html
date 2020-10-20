@@ -3,13 +3,16 @@
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" type="text/css" href="code_highlight.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
   <title>Ex-Ample - Elixir By Example</title>
 </head>
-
 <section class="page-wrapper">
   <div class="explanation">
     <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
-    <p>Functions in elixir are uniquely identified by their name AND the number of arguments that a function has. So two functions with the same name are different if they have a different number of arguments.</p>
+    <h3>Functions</h3>
+<p>Functions in elixir are uniquely identified by their name AND the number of arguments that a function has. So two functions with the same name are different if they have a different number of arguments.</p>
 <p>There are two kinds of functions in Elixir, those found in modules and lambdas.</p>
 <p>Lambdas are free floating functions, they are called with a dot. They are not namespaced under a module and can float around anywhere</p>
 <p>A good use case for lambdas is higher order functions like Enum.map</p>
@@ -18,19 +21,36 @@
   </div>
   <div class="code-example" id="code-example">
     <button class="copy-btn" role="button">Copy to clipboard</button>
-    <pre class="highlight"><code><span class="n">upcase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k" data-group-id="8550969534-1">fn</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="8550969534-2">(</span><span class="n">letter</span><span class="p" data-group-id="8550969534-2">)</span><span class="w"> </span><span class="k" data-group-id="8550969534-1">end</span><span class="w">
+    <pre class="highlight"><code><span class="n">upcase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k" data-group-id="0048008447-1">fn</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="0048008447-2">(</span><span class="n">letter</span><span class="p" data-group-id="0048008447-2">)</span><span class="w"> </span><span class="k" data-group-id="0048008447-1">end</span><span class="w">
 </span><span class="c1"># Note the dot before the bracket.</span><span class="w">
-</span><span class="n">upcase</span><span class="o">.</span><span class="p" data-group-id="8550969534-3">(</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="8550969534-3">)</span><span class="w">
+</span><span class="n">upcase</span><span class="o">.</span><span class="p" data-group-id="0048008447-3">(</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="0048008447-3">)</span><span class="w">
 
-</span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="8550969534-4">(</span><span class="p" data-group-id="8550969534-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="8550969534-5">]</span><span class="p">,</span><span class="w"> </span><span class="n">upcase</span><span class="p" data-group-id="8550969534-4">)</span><span class="w">
+</span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="0048008447-4">(</span><span class="p" data-group-id="0048008447-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="0048008447-5">]</span><span class="p">,</span><span class="w"> </span><span class="n">upcase</span><span class="p" data-group-id="0048008447-4">)</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Letter</span><span class="w"> </span><span class="k" data-group-id="8550969534-6">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">upcase</span><span class="p" data-group-id="8550969534-7">(</span><span class="n">letter</span><span class="p" data-group-id="8550969534-7">)</span><span class="w"> </span><span class="k" data-group-id="8550969534-8">do</span><span class="w">
-    </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="8550969534-9">(</span><span class="n">letter</span><span class="p" data-group-id="8550969534-9">)</span><span class="w">
-  </span><span class="k" data-group-id="8550969534-8">end</span><span class="w">
-</span><span class="k" data-group-id="8550969534-6">end</span><span class="w">
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Letter</span><span class="w"> </span><span class="k" data-group-id="0048008447-6">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">upcase</span><span class="p" data-group-id="0048008447-7">(</span><span class="n">letter</span><span class="p" data-group-id="0048008447-7">)</span><span class="w"> </span><span class="k" data-group-id="0048008447-8">do</span><span class="w">
+    </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="0048008447-9">(</span><span class="n">letter</span><span class="p" data-group-id="0048008447-9">)</span><span class="w">
+  </span><span class="k" data-group-id="0048008447-8">end</span><span class="w">
+</span><span class="k" data-group-id="0048008447-6">end</span><span class="w">
 
-</span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="8550969534-10">(</span><span class="p" data-group-id="8550969534-11">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="8550969534-11">]</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Letter</span><span class="o">.</span><span class="n">upcase</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="8550969534-10">)</span></code></pre>
+</span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="0048008447-10">(</span><span class="p" data-group-id="0048008447-11">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="0048008447-11">]</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Letter</span><span class="o">.</span><span class="n">upcase</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="0048008447-10">)</span><span class="w">
+</span><span class="c1"># Or an alternative syntax:</span><span class="w">
+</span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="0048008447-12">(</span><span class="p" data-group-id="0048008447-13">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="0048008447-13">]</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">Letter</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="0048008447-14">(</span><span class="ni">&amp;1</span><span class="p" data-group-id="0048008447-14">)</span><span class="p" data-group-id="0048008447-12">)</span><span class="w">
+</span><span class="c1"># &amp;1 refers to the first argument passed to</span><span class="w">
+</span><span class="c1"># Letter.upcase. If there are more arguments</span><span class="w">
+</span><span class="c1"># you can refer to them like so</span><span class="w">
+
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Letter</span><span class="w"> </span><span class="k" data-group-id="0048008447-15">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">join_upcase</span><span class="p" data-group-id="0048008447-16">(</span><span class="n">letter</span><span class="p">,</span><span class="w"> </span><span class="n">next_letter</span><span class="p" data-group-id="0048008447-16">)</span><span class="w"> </span><span class="k" data-group-id="0048008447-17">do</span><span class="w">
+    </span><span class="nc">String</span><span class="o">.</span><span class="n">upcase</span><span class="p" data-group-id="0048008447-18">(</span><span class="n">letter</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">next_letter</span><span class="p" data-group-id="0048008447-18">)</span><span class="w">
+  </span><span class="k" data-group-id="0048008447-17">end</span><span class="w">
+</span><span class="k" data-group-id="0048008447-15">end</span><span class="w">
+
+</span><span class="nc">Enum</span><span class="o">.</span><span class="n">zip_with</span><span class="p" data-group-id="0048008447-19">(</span><span class="w">
+  </span><span class="p" data-group-id="0048008447-20">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p" data-group-id="0048008447-20">]</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="0048008447-21">[</span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;d&quot;</span><span class="p" data-group-id="0048008447-21">]</span><span class="p">,</span><span class="w">
+  </span><span class="o">&amp;</span><span class="nc">Letter</span><span class="o">.</span><span class="n">join_upcase</span><span class="p" data-group-id="0048008447-22">(</span><span class="ni">&amp;1</span><span class="p">,</span><span class="w"> </span><span class="ni">&amp;2</span><span class="p" data-group-id="0048008447-22">)</span><span class="w">
+</span><span class="p" data-group-id="0048008447-19">)</span></code></pre>
   </div>
 </section>
 <section class="footer-btns">
@@ -50,9 +70,29 @@ defmodule Letter do
   end
 end
 
-Enum.map(["a", "b"], &Letter.upcase/1)`
-</script>
+Enum.map(["a", "b"], &Letter.upcase/1)
+# Or an alternative syntax:
+Enum.map(["a", "b"], &Letter.upcase(&1))
+# &1 refers to the first argument passed to
+# Letter.upcase. If there are more arguments
+# you can refer to them like so
 
+defmodule Letter do
+  def join_upcase(letter, next_letter) do
+    String.upcase(letter <> next_letter)
+  end
+end
+
+Enum.zip_with(
+  ["a", "b"],
+  ["c", "d"],
+  &Letter.join_upcase(&1, &2)
+)`
+</script>
+<section class="footer">
+  <p class="footer-p">Missing an example? Request more examples or submit a PR <a href="https://github.com/Adzz/ex-ample">on github</a></p>
+  <sub>Elixir by example is heavily inspired by <a href="https://gobyexample.com/">go by example.</a></sub>
+</section>
 <script>
 
 /*!
