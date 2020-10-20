@@ -11,75 +11,72 @@
 <section class="page-wrapper">
   <div class="explanation">
     <h1 class="example-heading"><a href="./">Elixir by Example</a></h1>
-    <h3>Modules</h3>
-<p>In Elixir we group functions together with modules.
-<p>Modules provide a namespace for functions, meaning you can have two functions with the same name and arity, but if they are in different modules they are different functions.</p>
-<p>Modules also allow us to group together functions that belong with each other.</p>
+    <h3>With</h3>
+<p>If you have nested case statements, or nested if statements you can usually flatten them with a with construct.</p>
+<p>A with will pattern match the right hand side of the <- arrow to the left and if it matches will continue to the next statement</p>
+<p>If it does not match it will fall through to the else.</p>
 
   </div>
   <div class="code-example" id="code-example">
     <button class="copy-btn" role="button">Copy to clipboard</button>
-    <pre class="highlight"><code><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ThisIsAModule</span><span class="w"> </span><span class="k" data-group-id="3865731233-1">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">this_is_a_function</span><span class="p" data-group-id="3865731233-2">(</span><span class="p" data-group-id="3865731233-2">)</span><span class="w"> </span><span class="k" data-group-id="3865731233-3">do</span><span class="w">
-    </span><span class="ss">:ok</span><span class="w">
-  </span><span class="k" data-group-id="3865731233-3">end</span><span class="w">
-</span><span class="k" data-group-id="3865731233-1">end</span><span class="w">
+    <pre class="highlight"><code><span class="c1"># We can turn the following nested case statement...</span><span class="w">
+</span><span class="n">weather</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="8973298433-1">%{</span><span class="ss">chance_of_rain</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p" data-group-id="8973298433-1">}</span><span class="w">
+</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="n">chance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weather</span><span class="o">.</span><span class="n">chance_of_rain</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Triangle</span><span class="w"> </span><span class="k" data-group-id="3865731233-4">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">area</span><span class="p" data-group-id="3865731233-5">(</span><span class="n">triangle</span><span class="p" data-group-id="3865731233-5">)</span><span class="w"> </span><span class="k" data-group-id="3865731233-6">do</span><span class="w">
-    </span><span class="c1"># ... some math</span><span class="w">
-  </span><span class="k" data-group-id="3865731233-6">end</span><span class="w">
-</span><span class="k" data-group-id="3865731233-4">end</span><span class="w">
+</span><span class="k">case</span><span class="w"> </span><span class="n">chance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="k" data-group-id="8973298433-2">do</span><span class="w">
+  </span><span class="no">true</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+    </span><span class="n">min</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="k" data-group-id="3865731233-7">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">area</span><span class="p" data-group-id="3865731233-8">(</span><span class="n">circle</span><span class="p" data-group-id="3865731233-8">)</span><span class="w"> </span><span class="k" data-group-id="3865731233-9">do</span><span class="w">
-    </span><span class="c1"># ... more math</span><span class="w">
-  </span><span class="k" data-group-id="3865731233-9">end</span><span class="w">
-</span><span class="k" data-group-id="3865731233-7">end</span><span class="w">
+  </span><span class="no">false</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+    </span><span class="k">case</span><span class="w"> </span><span class="n">chance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="k" data-group-id="8973298433-3">do</span><span class="w">
+      </span><span class="no">true</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">max</span><span class="w">
+      </span><span class="no">false</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">chance</span><span class="w">
+    </span><span class="k" data-group-id="8973298433-3">end</span><span class="w">
+</span><span class="k" data-group-id="8973298433-2">end</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="k" data-group-id="3865731233-10">do</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">area</span><span class="p" data-group-id="3865731233-11">(</span><span class="n">shape</span><span class="p" data-group-id="3865731233-11">)</span><span class="w"> </span><span class="k" data-group-id="3865731233-12">do</span><span class="w">
-    </span><span class="c1"># ...</span><span class="w">
-  </span><span class="k" data-group-id="3865731233-12">end</span><span class="w">
+</span><span class="c1"># Into a with:</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">perimeter</span><span class="p" data-group-id="3865731233-13">(</span><span class="n">shape</span><span class="p" data-group-id="3865731233-13">)</span><span class="w"> </span><span class="k" data-group-id="3865731233-14">do</span><span class="w">
-    </span><span class="c1"># ...</span><span class="w">
-  </span><span class="k" data-group-id="3865731233-14">end</span><span class="w">
-</span><span class="k" data-group-id="3865731233-10">end</span></code></pre>
+</span><span class="k">with</span><span class="w"> </span><span class="p" data-group-id="8973298433-4">{</span><span class="ss">:too_small</span><span class="p">,</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="8973298433-4">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="8973298433-5">{</span><span class="ss">:too_small</span><span class="p">,</span><span class="w"> </span><span class="n">chance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min</span><span class="p" data-group-id="8973298433-5">}</span><span class="p">,</span><span class="w">
+     </span><span class="p" data-group-id="8973298433-6">{</span><span class="ss">:too_large</span><span class="p">,</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="8973298433-6">}</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="8973298433-7">{</span><span class="ss">:too_large</span><span class="p">,</span><span class="w"> </span><span class="n">chance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="p" data-group-id="8973298433-7">}</span><span class="w"> </span><span class="k" data-group-id="8973298433-8">do</span><span class="w">
+  </span><span class="p" data-group-id="8973298433-9">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">chance</span><span class="p" data-group-id="8973298433-9">}</span><span class="w">
+</span><span class="k" data-group-id="8973298433-8">else</span><span class="w">
+  </span><span class="p" data-group-id="8973298433-10">{</span><span class="ss">:too_small</span><span class="p">,</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8973298433-10">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8973298433-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p" data-group-id="8973298433-11">}</span><span class="w">
+  </span><span class="p" data-group-id="8973298433-12">{</span><span class="ss">:too_large</span><span class="p">,</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8973298433-12">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8973298433-13">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p" data-group-id="8973298433-13">}</span><span class="w">
+</span><span class="k" data-group-id="8973298433-8">end</span></code></pre>
   </div>
 </section>
 <section class="footer-btns">
-  <a href="./shebang.html" class="prev">Previous</a>
-  <a href="./functions.html" class="next">Next</a>
+  <a href="./functions.html" class="prev">Previous</a>
 </section>
 <script>
 // Used for the copy to clipboard button.
-var code = `defmodule ThisIsAModule do
-  def this_is_a_function() do
-    :ok
-  end
+var code = `# We can turn the following nested case statement...
+weather = %{chance_of_rain: 84}
+max = 90
+min = 1
+chance = weather.chance_of_rain
+
+case chance < min do
+  true ->
+    min
+
+  false ->
+    case chance > max do
+      true -> max
+      false -> chance
+    end
 end
 
-defmodule Triangle do
-  def area(triangle) do
-    # ... some math
-  end
-end
+# Into a with:
 
-defmodule Circle do
-  def area(circle) do
-    # ... more math
-  end
-end
-
-defmodule Shape do
-  def area(shape) do
-    # ...
-  end
-
-  def perimeter(shape) do
-    # ...
-  end
+with {:too_small, false} <- {:too_small, chance < min},
+     {:too_large, false} <- {:too_large, chance > max} do
+  {:ok, chance}
+else
+  {:too_small, true} -> {:ok, min}
+  {:too_large, true} -> {:ok, max}
 end`
 </script>
 <section class="footer">
